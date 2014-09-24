@@ -10,6 +10,8 @@ for (var a in assert) {
 var assertions = 0;
 var failures = 0;
 
+process.on('exit', tapsert$exit);
+
 function tapifyAssert(assert) {
   return tapifiedAssert;
 
@@ -56,8 +58,8 @@ function maybeHeader() {
     console.log('TAP version 13');
 }
 
-process.on('exit', function(code) {
+function tapsert$exit(code) {
   maybeHeader();
   console.log('1..%d', assertions);
   process.exit(failures);
-});
+}
