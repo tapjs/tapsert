@@ -15,15 +15,24 @@ execFile(process.execPath, ['test-bad-tests.js'], {}, assertBad);
 execFile(process.execPath, ['.'], {}, assertNoTests);
 
 function assertBad(err, stdout, stderr) {
+  assertHeader(err, stdout, stderr);
   assert(err, 'bad file exits with an error');
+  assert.notEqual(stderr, '', 'tapsert does not clear stderr');
   assert(/Premature exit with code \d/.test(stdout), 'exits prematurely');
   assert(/No assertions run/.test(stdout),
          'notices that no asserions were run');
 }
 
 function assertNoTests(err, stdout, stderr) {
+  assertHeader(err, stdout, stderr);
   assert(err, 'no assertions run is considered a failure');
+  assert.equal(stderr, '', 'tapsert does not write to stderr');
   assert(!/Premature exit with code/.test(stdout),
          'does not exit prematurely');
   assert(/No assertions run/.test(stdout), 'says no assertions were run');
+}
+
+function assertHeader(err, stdout, stderr) {
+  assert(/^[\s]*TAP version 13/.test(stdout),
+         'TAP version header is the first non-whitespace output');
 }
