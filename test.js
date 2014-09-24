@@ -1,4 +1,5 @@
 var assert = require('./');
+var execFile = require('child_process').execFile;
 
 assert(assert, 'assert exists');
 assert(assert.equal, 'assert.equal exists');
@@ -9,3 +10,9 @@ assert.doesNotThrow(function() {
     throw Error('expected!');
   }, /expected/, 'supports assert.throws');
 }, 'nested asserts are weird.');
+
+execFile(process.execPath, ['.'], {}, assertNoTests);
+
+function assertNoTests(err, stdout, stderr) {
+  assert(err, 'no assertions run is considered a failure');
+}

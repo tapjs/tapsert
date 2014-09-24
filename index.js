@@ -61,5 +61,9 @@ function maybeHeader() {
 function tapsert$exit(code) {
   maybeHeader();
   console.log('1..%d', assertions);
+
+  // Treat 0 assertions as a failure
+  failures += 0|!assertions;
+
   process.exit(failures);
 }
