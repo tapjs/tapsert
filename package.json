@@ -1,6 +1,6 @@
 {
   "name": "tapsert",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Drop in assert replacement that produces TAP output.",
   "main": "index.js",
   "scripts": {
