@@ -17,10 +17,13 @@ execFile(process.execPath, ['.'], {}, assertNoTests);
 function assertBad(err, stdout, stderr) {
   assert(err, 'bad file exits with an error');
   assert(/Premature exit with code \d/.test(stdout), 'exits prematurely');
+  assert(/No assertions run/.test(stdout),
+         'notices that no asserions were run');
 }
 
 function assertNoTests(err, stdout, stderr) {
   assert(err, 'no assertions run is considered a failure');
   assert(!/Premature exit with code/.test(stdout),
          'does not exit prematurely');
+  assert(/No assertions run/.test(stdout), 'says no assertions were run');
 }

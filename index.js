@@ -65,6 +65,10 @@ function tapsert$exit(code) {
   // Treat 0 assertions as a failure
   failures += 0|!assertions;
 
+  if (assertions === 0)
+    console.log('# No assertions run');
+  if (failures)
+    console.log('# %d failures', failures);
   if (code)
     console.log('# Premature exit with code %d', code);
 
