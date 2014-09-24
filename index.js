@@ -1,16 +1,18 @@
 var assert = require('assert');
 
-module.exports = tapsert = recordAssert(assert);
+var tapsert = module.exports = tapifyAssert(assert);
 
 for (var a in assert) {
-  tapsert[a] = recordAssert(assert[a]);
+  tapsert[a] = tapifyAssert(assert[a]);
 }
 
 var assertions = 0;
 var failures = 0;
 
-function recordAssert(assert) {
-  return function() {
+function tapifyAssert(assert) {
+  return tapifiedAssert;
+
+  function tapifiedAssert() {
     var desc = (arguments.length === assert.length
                 ? arguments[arguments.length-1]
                 : '');
@@ -24,7 +26,7 @@ function recordAssert(assert) {
       failures += 1;
       console.log('not ok %d - %s', n, desc)
     }
-  };
+  }
 }
 
 process.on('exit', function() {
