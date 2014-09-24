@@ -16,8 +16,7 @@ function tapifyAssert(assert) {
     var desc = (arguments.length === assert.length
                 ? arguments[arguments.length-1]
                 : '');
-    if (assertions === 0)
-      console.log('TAP version 13');
+    maybeHeader();
     var n = assertions += 1;
     try {
       assert.apply(null, arguments);
@@ -29,7 +28,13 @@ function tapifyAssert(assert) {
   }
 }
 
-process.on('exit', function() {
+function maybeHeader() {
+  if (assertions === 0)
+    console.log('TAP version 13');
+}
+
+process.on('exit', function(code) {
+  maybeHeader();
   console.log('1..%d', assertions);
   process.exit(failures);
 });
