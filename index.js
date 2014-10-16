@@ -59,18 +59,23 @@ function maybeHeader() {
 }
 
 function tapsert$exit(code) {
-  maybeHeader();
-  console.log('1..%d', assertions);
-
   // Treat 0 assertions as a failure
   failures += 0|!assertions;
 
-  if (assertions === 0)
-    console.log('# No assertions run');
-  if (failures)
-    console.log('# %d failures', failures);
+  maybeHeader();
+
   if (code)
     console.log('# Premature exit with code %d', code);
+
+  console.log('\n1..%d', assertions);
+  console.log('# tests %d', assertions);
+  if (assertions-failures > 0)
+    console.log('# pass  %d', Math.max(assertions-failures, 0));
+  if (failures > 0)
+    console.log('# fail  %d', failures);
+  // TODO: add skip support
+  // if (skipped > 0)
+  //   console.log('# skip  %d', skipped);
 
   // only exit with non-zero if we need to and aren't already doing so
   if (!code && failures)

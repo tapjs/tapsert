@@ -19,7 +19,7 @@ function assertBad(err, stdout, stderr) {
   assert(err, 'bad file exits with an error');
   assert.notEqual(stderr, '', 'tapsert does not clear stderr');
   assert(/Premature exit with code \d/.test(stdout), 'exits prematurely');
-  assert(/No assertions run/.test(stdout),
+  assert(/# tests 0/.test(stdout),
          'notices that no asserions were run');
 }
 
@@ -29,7 +29,7 @@ function assertNoTests(err, stdout, stderr) {
   assert.equal(stderr, '', 'tapsert does not write to stderr');
   assert(!/Premature exit with code/.test(stdout),
          'does not exit prematurely');
-  assert(/No assertions run/.test(stdout), 'says no assertions were run');
+  assert(/# tests 0/.test(stdout), 'says no assertions were run');
 }
 
 function assertHeader(err, stdout, stderr) {
