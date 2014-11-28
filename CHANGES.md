@@ -1,5 +1,13 @@
-2014-09-23, Version v1.0.0
-==========================
+2014-11-28, Version 1.1.0
+=========================
+
+ * doc: Update description and examples (Ryan Graham)
+
+ * Make summary more like other TAP runners (Ryan Graham)
+
+
+2014-09-23, Version 1.0.0
+=========================
 
  * Test for headers and stderr changes (Ryan Graham)
 
@@ -18,7 +26,7 @@
  * Fix leaked global (Ryan Graham)
 
 
-2014-08-23, Version v0.0.1
-==========================
+2014-08-23, Version 0.0.1
+=========================
 
  * First release!
