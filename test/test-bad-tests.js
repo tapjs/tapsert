@@ -1,0 +1,3 @@
+var assert = require('../');
+
+functionNotFound();

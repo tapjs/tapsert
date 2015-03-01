@@ -1,4 +1,4 @@
-var assert = require('./');
+var assert = require('../');
 var execFile = require('child_process').execFile;
 
 assert(assert, 'assert exists');
@@ -11,8 +11,8 @@ assert.doesNotThrow(function() {
   }, /expected/, 'supports assert.throws');
 }, 'nested asserts are weird.');
 
-execFile(process.execPath, ['test-bad-tests.js'], {}, assertBad);
-execFile(process.execPath, ['.'], {}, assertNoTests);
+execFile(process.execPath, [require.resolve('./test-bad-tests.js')], {}, assertBad);
+execFile(process.execPath, [require.resolve('../')], {}, assertNoTests);
 
 function assertBad(err, stdout, stderr) {
   assertHeader(err, stdout, stderr);

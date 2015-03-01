@@ -4,7 +4,7 @@
   "description": "Drop in assert replacement that produces TAP output.",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js --tap"
+    "test": "node test --tap"
   },
   "repository": {
     "type": "git",
