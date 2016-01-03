@@ -9,10 +9,37 @@ Uses
    runner or harness but you still want TAP output (`node plain.js`)
  * drop-in replacement for `assert` if you use a TAP consuming test runner
    but don't want to use a "real" test harness (`tap plain.js`)
+ * stepping-stone for migrating from `assert` to `tap`
 
 ## Usage
 
 Use tapsert the same as you would use assert if you don't use a test runner.
+
+### Examples
+
+Start with the assert module from node core.
+```js
+var assert = require('assert');
+assert.equal('actual', 'expected', 'core assert style');
+```
+
+Replace `require('assert')` with `require('tapsert')` to produce TAP output.
+```js
+var assert = require('tapsert');
+assert.equal('actual', 'expected', 'core assert style');
+```
+
+Rename `assert` to `tap` to prepare for switching to [https://github.com/tapjs/node-tap](tap).
+```js
+var tap = require('tapsert');
+tap.equal('actual', 'expected', 'tap assert style');
+```
+
+Replace `require('tapsert')` with `require('tap')` and you're using tap.
+```js
+var tap = require('tap');
+tap.equal('actual', 'expected', 'tap assert style');
+```
 
 ### Tests
 

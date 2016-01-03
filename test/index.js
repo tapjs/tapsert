@@ -13,6 +13,9 @@ assert.doesNotThrow(function() {
 
 exec('./test-bad-tests.js', {}, assertBad);
 exec('../', {}, assertNoTests);
+exec('../example', {}, tapsertExample);
+exec('../tap-example', {}, tapExample);
+exec('../example', {env: {ASSERT: 'assert'}}, assertExample);
 
 function exec(path, opts, callback) {
   execFile(process.execPath, [require.resolve(path)], opts, callback);
@@ -36,7 +39,36 @@ function assertNoTests(err, stdout, stderr) {
   assert(/# tests 0/.test(stdout), 'says no assertions were run');
 }
 
+function tapsertExample(err, stdout, stderr) {
+  assertHeader(err, stdout, stderr);
+  assert(err, 'example fails and exits with non-zero code');
+  assert.equal(stderr, '', 'example does not write to stderr');
+  assert(/^1\.\.6$/m.test(stdout), 'example has TAP plan');
+  assert(/^# tests 6$/m.test(stdout), 'example has 6 tests');
+  assert(/^# pass  5$/m.test(stdout), 'example has 5 passing tests');
+  assert(/^# fail  1$/m.test(stdout), 'example has 1 failing test');
+}
+
+function assertExample(err, stdout, stderr) {
+  assert(err, 'failure results in non-zero exit');
+  assert.equal(stdout, '', 'prints nothing to stdout');
+  assert(/^AssertionError: really want false to be true$/m.test(stderr),
+         'first failed assertion throws an exception');
+  assert(/^\s+at .+example\.js:\d+:\d+\)$/m.test(stderr),
+         'assertion exception includes regular stacktrace');
+}
+
+function tapExample(err, stdout, stderr) {
+  assertHeader(err, stdout, stderr);
+  assert(err, 'tap-example fails and exits with non-zero code');
+  assert.equal(stderr, '', 'tap-example does not write to stderr');
+  assert(/^1\.\.6$/m.test(stdout), 'tap-example has TAP plan');
+  assert(/^# tests 6$/m.test(stdout), 'tap-example has 6 tests');
+  assert(/^# pass  5$/m.test(stdout), 'tap-example has 5 passing tests');
+  assert(/^# fail  1$/m.test(stdout), 'tap-example has 1 failing test');
+}
+
 function assertHeader(err, stdout, stderr) {
-  assert(/^[\s]*TAP version 13/.test(stdout),
+  assert(/^\s*TAP version 13/.test(stdout),
          'TAP version header is the first non-whitespace output');
 }

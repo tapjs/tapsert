@@ -6,6 +6,9 @@ var tapsert = module.exports = tapifyAssert(assert);
 for (var a in assert) {
   tapsert[a] = tapifyAssert(assert[a]);
 }
+if (!('assert' in tapsert)) {
+  tapsert.assert = tapsert;
+}
 
 var assertions = 0;
 var failures = 0;
