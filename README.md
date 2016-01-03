@@ -1,4 +1,4 @@
-tapsert
+tapsert [![Build Status](https://travis-ci.org/tapjs/tapsert.svg)](https://travis-ci.org/tapjs/tapsert)
 =======
 
 An almost-drop-in replacement for the assert module provided by Node core that
@@ -91,3 +91,6 @@ AssertionError: really want false to be true
 $ echo $?
 8
 ```
+
+---
+&copy; 2014 Ryan Graham
