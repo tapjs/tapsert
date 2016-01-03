@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rmg/tapsert.git"
+    "url": "https://github.com/tapjs/tapsert.git"
   },
   "keywords": [
     "assert",
@@ -17,7 +17,7 @@
   "author": "Ryan Graham <r.m.graham@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rmg/tapsert/issues"
+    "url": "https://github.com/tapjs/tapsert/issues"
   },
-  "homepage": "https://github.com/rmg/tapsert"
+  "homepage": "https://github.com/tapjs/tapsert"
 }
