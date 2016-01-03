@@ -11,8 +11,12 @@ assert.doesNotThrow(function() {
   }, /expected/, 'supports assert.throws');
 }, 'nested asserts are weird.');
 
-execFile(process.execPath, [require.resolve('./test-bad-tests.js')], {}, assertBad);
-execFile(process.execPath, [require.resolve('../')], {}, assertNoTests);
+exec('./test-bad-tests.js', {}, assertBad);
+exec('../', {}, assertNoTests);
+
+function exec(path, opts, callback) {
+  execFile(process.execPath, [require.resolve(path)], opts, callback);
+}
 
 function assertBad(err, stdout, stderr) {
   assertHeader(err, stdout, stderr);
