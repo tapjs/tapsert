@@ -1,3 +1,17 @@
+2016-01-03, Version 1.2.0
+=========================
+
+ * add tapsert.assert to be more node-tap compatible (Ryan Graham)
+
+ * refactor: extract execFile helper in tests (Ryan Graham)
+
+ * add travis (Ryan Graham)
+
+ * move repo to tapjs org (Ryan Graham)
+
+ * Reorganize tests into test directory (Ryan Graham)
+
+
 2014-11-28, Version 1.1.0
 =========================
 
