@@ -21,7 +21,7 @@ function tapifyAssert(assert) {
   function tapifiedAssert() {
     var desc = (arguments.length === assert.length
                 ? arguments[arguments.length-1]
-                : '');
+                : assert.name);
     maybeHeader();
     var n = assertions += 1;
     try {

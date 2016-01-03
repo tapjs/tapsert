@@ -1,6 +1,8 @@
 var assert = require('../');
 var execFile = require('child_process').execFile;
 
+assert('truthy, not a description');
+assert.equal('auto description', 'auto description');
 assert(assert, 'assert exists');
 assert(assert.equal, 'assert.equal exists');
 assert.equal(typeof assert.strictEqual, 'function',
