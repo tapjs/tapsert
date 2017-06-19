@@ -4,7 +4,10 @@
   "description": "Drop in assert replacement that produces TAP output.",
   "main": "index.js",
   "scripts": {
-    "test": "node test --tap"
+    "test": "tap --100 test/index.js",
+    "preversion": "npm test",
+    "postversion": "npm publish",
+    "postpublish": "git push origin --all; git push origin --tags"
   },
   "repository": {
     "type": "git",
@@ -19,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/tapjs/tapsert/issues"
   },
-  "homepage": "https://github.com/tapjs/tapsert"
+  "homepage": "https://github.com/tapjs/tapsert",
+  "devDependencies": {
+    "tap": "^10.4.0"
+  }
 }

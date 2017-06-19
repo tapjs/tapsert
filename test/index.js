@@ -54,7 +54,7 @@ function tapsertExample(err, stdout, stderr) {
 function assertExample(err, stdout, stderr) {
   assert(err, 'failure results in non-zero exit');
   assert.equal(stdout, '', 'prints nothing to stdout');
-  assert(/^AssertionError: really want false to be true$/m.test(stderr),
+  assert(/^AssertionError.*: really want false to be true$/m.test(stderr),
          'first failed assertion throws an exception');
   assert(/^\s+at .+example\.js:\d+:\d+\)$/m.test(stderr),
          'assertion exception includes regular stacktrace');
