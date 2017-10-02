@@ -12,6 +12,11 @@ assert.doesNotThrow(function() {
     throw Error('expected!');
   }, /expected/, 'supports assert.throws');
 }, 'nested asserts are weird.');
+assert.doesNotThrow(function() {
+  assert.throws(function() {
+    assert.ifError(Error('expected!'));
+  }, /expected/, 'assert.ifError is supported');
+}, 'quite weird');
 
 exec('./test-bad-tests.js', {}, assertBad);
 exec('../', {}, assertNoTests);
@@ -45,9 +50,9 @@ function tapsertExample(err, stdout, stderr) {
   assertHeader(err, stdout, stderr);
   assert(err, 'example fails and exits with non-zero code');
   assert.equal(stderr, '', 'example does not write to stderr');
-  assert(/^1\.\.6$/m.test(stdout), 'example has TAP plan');
-  assert(/^# tests 6$/m.test(stdout), 'example has 6 tests');
-  assert(/^# pass  5$/m.test(stdout), 'example has 5 passing tests');
+  assert(/^1\.\.8$/m.test(stdout), 'example has TAP plan');
+  assert(/^# tests 8$/m.test(stdout), 'example has 8 tests');
+  assert(/^# pass  7$/m.test(stdout), 'example has 7 passing tests');
   assert(/^# fail  1$/m.test(stdout), 'example has 1 failing test');
 }
 
@@ -64,9 +69,9 @@ function tapExample(err, stdout, stderr) {
   assertHeader(err, stdout, stderr);
   assert(err, 'tap-example fails and exits with non-zero code');
   assert.equal(stderr, '', 'tap-example does not write to stderr');
-  assert(/^1\.\.6$/m.test(stdout), 'tap-example has TAP plan');
-  assert(/^# tests 6$/m.test(stdout), 'tap-example has 6 tests');
-  assert(/^# pass  5$/m.test(stdout), 'tap-example has 5 passing tests');
+  assert(/^1\.\.8$/m.test(stdout), 'tap-example has TAP plan');
+  assert(/^# tests 8$/m.test(stdout), 'tap-example has 8 tests');
+  assert(/^# pass  7$/m.test(stdout), 'tap-example has 7 passing tests');
   assert(/^# fail  1$/m.test(stdout), 'tap-example has 1 failing test');
 }
 

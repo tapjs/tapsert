@@ -13,4 +13,8 @@ t.doesNotThrow(function() {
     throw Error('expected!');
   }, /expected/, 'supports t.throws');
 }, 'nested asserts are weird.');
-
+t.doesNotThrow(function() {
+  t.throws(function() {
+    t.ifError(Error('expected!'));
+  }, /expected/, 'assert.ifError is supported');
+}, 'quite weird');

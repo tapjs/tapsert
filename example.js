@@ -10,4 +10,8 @@ assert.doesNotThrow(function() {
     throw Error('expected!');
   }, /expected/, 'supports assert.throws');
 }, 'nested asserts are weird.');
-
+assert.doesNotThrow(function() {
+  assert.throws(function() {
+    assert.ifError(Error('expected!'));
+  }, /expected/, 'assert.ifError is supported');
+}, 'quite weird');

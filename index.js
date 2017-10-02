@@ -4,7 +4,7 @@ var fmt = require('util').format;
 var tapsert = module.exports = tapifyAssert(assert);
 
 for (var a in assert) {
-  tapsert[a] = tapifyAssert(assert[a]);
+  tapsert[a] = (a === 'ifError') ? assert[a] : tapifyAssert(assert[a]);
 }
 tapsert.assert = tapsert
 
