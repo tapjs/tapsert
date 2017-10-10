@@ -18,6 +18,7 @@ exec('../', {}, assertNoTests);
 exec('../example', {}, tapsertExample);
 exec('../tap-example', {}, tapExample);
 exec('../example', {env: {ASSERT: 'assert'}}, assertExample);
+exec('./assert.fail.js', {}, assertFail);
 
 function exec(path, opts, callback) {
   execFile(process.execPath, [require.resolve(path)], opts, callback);
@@ -73,4 +74,16 @@ function tapExample(err, stdout, stderr) {
 function assertHeader(err, stdout, stderr) {
   assert(/^\s*TAP version 13/.test(stdout),
          'TAP version header is the first non-whitespace output');
+}
+
+function assertFail(err, stdout, stderr) {
+  assertHeader(err, stdout, stderr);
+  assert(err, 'failing file exits with an error');
+  assert.equal(stderr, '', 'assert.fail does not write to stderr');
+  assert(/actual: "actual"/.test(stdout), 'includes "actual" value');
+  assert(/expected: "expected"/.test(stdout), 'includes "expected" value');
+  assert(/operator: "assert.fail"/.test(stdout), 'includes "operator"');
+  assert(/message: Should never pass/.test(stdout), 'includes "message"');
+  assert(/^# tests 1$/m.test(stdout), 'assert.fail has 1 tests');
+  assert(/^# fail  1$/m.test(stdout), 'assert.fail has 1 failing test');
 }
