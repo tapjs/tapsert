@@ -1,7 +1,7 @@
 tapsert [![Build Status](https://travis-ci.org/tapjs/tapsert.svg)](https://travis-ci.org/tapjs/tapsert)
 =======
 
-An almost-drop-in replacement for the assert module provided by Node core that
+A total drop-in replacement for the assert module provided by Node core that
 prints TAP compliant output instead of throwing `AssertionError`s.
 
 Uses
