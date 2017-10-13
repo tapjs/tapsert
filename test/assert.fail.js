@@ -4,6 +4,7 @@ const actual = 'actual';
 const expected = 'expected';
 const operator = '<=>';
 
+assert.fail();
 assert.fail(actual, expected, 'with custom message');
 assert.fail(actual, expected, 'with message and operator', operator);
 assert.fail(actual, expected, undefined, operator);

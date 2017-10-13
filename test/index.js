@@ -86,26 +86,28 @@ function assertFail(err, stdout, stderr) {
   assert(err, 'failing file exits with an error');
   assert.equal(stderr, '', 'assert.fail does not write to stderr');
 
-  assert(/^not ok 1 - with custom message$/m.test(stdout),
+  assert(/^not ok 1 - fail$/m.test(stdout),
+    'handles no-args variant');
+  assert(/^not ok 2 - with custom message$/m.test(stdout),
     'handles three-argument variant');
-  assert(/^not ok 2 - with message and operator$/m.test(stdout),
+  assert(/^not ok 3 - with message and operator$/m.test(stdout),
     'handles four-argument variant');
-  assert(/^not ok 3 - 'actual' <=> 'expected'$/m.test(stdout),
+  assert(/^not ok 4 - 'actual' <=> 'expected'$/m.test(stdout),
     'handles four-argument variant with auto-message');
-  assert(/^not ok 4 - with everything$/m.test(stdout),
+  assert(/^not ok 5 - with everything$/m.test(stdout),
     'handles five-argument variant');
-  assert(/^not ok 5 - 'actual' <=> 'expected'$/m.test(stdout),
+  assert(/^not ok 6 - 'actual' <=> 'expected'$/m.test(stdout),
     'handles five-argument variant with auto-message');
 
   if (process.version >= 'v8.0.0') {
-    assert(/^not ok 6 - with message only$/m.test(stdout),
+    assert(/^not ok 7 - with message only$/m.test(stdout),
       'handles single-argument variant');
-    assert(/^not ok 7 - 'actual' != 'expected'$/m.test(stdout),
+    assert(/^not ok 8 - 'actual' != 'expected'$/m.test(stdout),
       'handles two-argument variant');
-    assert(/^# tests 7$/m.test(stdout), 'assert.fail has 7 tests');
-    assert(/^# fail  7$/m.test(stdout), 'assert.fail has 7 failing tests');
+    assert(/^# tests 8$/m.test(stdout), 'assert.fail has 8 tests');
+    assert(/^# fail  8$/m.test(stdout), 'assert.fail has 8 failing tests');
   } else {
-    assert(/^# tests 5$/m.test(stdout), 'assert.fail has 5 tests');
-    assert(/^# fail  5$/m.test(stdout), 'assert.fail has 5 failing tests');
+    assert(/^# tests 6$/m.test(stdout), 'assert.fail has 6 tests');
+    assert(/^# fail  6$/m.test(stdout), 'assert.fail has 6 failing tests');
   }
 }
