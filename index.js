@@ -27,6 +27,7 @@ function tapifyAssert(assert) {
       console.log('ok %d - %s', n, desc);
     } catch (e) {
       failures += 1;
+      desc = (assert.name === 'fail') ? e.message :  desc;
       console.log('not ok %d - %s', n, desc);
       console.log(formatAssertionError(e));
     }
