@@ -85,10 +85,20 @@ function assertFail(err, stdout, stderr) {
   assertHeader(err, stdout, stderr);
   assert(err, 'failing file exits with an error');
   assert.equal(stderr, '', 'assert.fail does not write to stderr');
-  assert(/actual: "actual"$/m.test(stdout), 'includes "actual" value');
-  assert(/expected: "expected"$/m.test(stdout), 'includes "expected" value');
-  assert(/operator: "assert.fail"$/m.test(stdout), 'includes "operator"');
-  assert(/message: Should never pass/.test(stdout), 'includes "message"');
-  assert(/^# tests 1$/m.test(stdout), 'assert.fail has 1 tests');
-  assert(/^# fail  1$/m.test(stdout), 'assert.fail has 1 failing test');
+  assert(/^not ok 1 - with message only$/m.test(stdout),
+    'handles single-argument variant');
+  assert(/^not ok 2 - 'actual' != 'expected'$/m.test(stdout),
+    'handles two-argument variant');
+  assert(/^not ok 3 - with custom message$/m.test(stdout),
+    'handles three-argument variant');
+  assert(/^not ok 4 - with message and operator$/m.test(stdout),
+    'handles four-argument variant');
+  assert(/^not ok 5 - 'actual' <=> 'expected'$/m.test(stdout),
+    'handles four-argument variant with auto-message');
+    assert(/^not ok 6 - with everything$/m.test(stdout),
+    'handles five-argument variant');
+  assert(/^not ok 7 - 'actual' <=> 'expected'$/m.test(stdout),
+    'handles five-argument variant with auto-message');
+  assert(/^# tests 7$/m.test(stdout), 'assert.fail has 7 tests');
+  assert(/^# fail  7$/m.test(stdout), 'assert.fail has 7 failing tests');
 }
