@@ -17,7 +17,7 @@ assert.fail(actual, expected, undefined, operator);
   assert.fail(actual, expected, undefined, operator, stackStart);
 })();
 
-if (process.version >= 'v8.0.0') {
+if (!/^v[0-7]\./.test(process.version)) { // New API from node v8.0.0+
   assert.fail('with message only');
   assert.fail(actual, expected);
 }

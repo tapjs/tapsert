@@ -99,7 +99,7 @@ function assertFail(err, stdout, stderr) {
   assert(/^not ok 6 - 'actual' <=> 'expected'$/m.test(stdout),
     'handles five-argument variant with auto-message');
 
-  if (process.version >= 'v8.0.0') {
+  if (!/^v[0-7]\./.test(process.version)) { // New API from node v8.0.0+
     assert(/^not ok 7 - with message only$/m.test(stdout),
       'handles single-argument variant');
     assert(/^not ok 8 - 'actual' != 'expected'$/m.test(stdout),
