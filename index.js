@@ -14,6 +14,9 @@ var failures = 0;
 process.on('exit', tapsert$exit);
 
 function tapifyAssert(assert) {
+  var length = Object.getOwnPropertyDescriptor(assert, 'length');
+  Object.defineProperty(tapifiedAssert, 'length', length);
+
   return tapifiedAssert;
 
   function tapifiedAssert() {
