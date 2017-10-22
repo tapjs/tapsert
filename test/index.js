@@ -27,10 +27,10 @@ exec('./assert.fail.js', {}, assertFail);
 
 const original = require('assert');
 const expected = require('../');
-assert.equal(original.length, expected.length, 'assert.equal arity unchanged');
+assert.equal(original.length, expected.length, 'assert() arity unchanged');
 for (var a in original) {
   assert.equal(
-    original[a].length, expected[a].length, `assert.${a} arity unchanged`
+    original[a].length, expected[a].length, `assert.${a}() arity unchanged`
   );
 }
 
