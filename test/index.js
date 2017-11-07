@@ -25,6 +25,15 @@ exec('../tap-example', {}, tapExample);
 exec('../example', {env: {ASSERT: 'assert'}}, assertExample);
 exec('./assert.fail.js', {}, assertFail);
 
+const original = require('assert');
+const expected = require('../');
+assert.equal(original.length, expected.length, 'assert() arity unchanged');
+for (var a in original) {
+  assert.equal(
+    original[a].length, expected[a].length, `assert.${a}() arity unchanged`
+  );
+}
+
 function exec(path, opts, callback) {
   execFile(process.execPath, [require.resolve(path)], opts, callback);
 }
