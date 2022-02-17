@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/tapjs/tapsert",
   "devDependencies": {
-    "tap": "^10.4.0"
+    "tap": "^15.1.6"
   }
 }
