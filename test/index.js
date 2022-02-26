@@ -1,6 +1,12 @@
 var assert = require('../');
 var execFile = require('child_process').execFile;
 
+function cleanupStderr (s) {
+  return s.split('\n').filter(function (s) {
+    return !/^\(node:[0-9]+\)|^\(Use `node --trace-deprecation/.test(s)
+  }).join('\n')
+}
+
 assert('truthy, not a description');
 assert.equal('auto description', 'auto description');
 assert(assert, 'assert exists');
@@ -30,6 +36,7 @@ function exec(path, opts, callback) {
 }
 
 function assertBad(err, stdout, stderr) {
+  stderr = cleanupStderr(stderr);
   assertHeader(err, stdout, stderr);
   assert(err, 'bad file exits with an error');
   assert.notEqual(stderr, '', 'tapsert does not clear stderr');
@@ -39,6 +46,7 @@ function assertBad(err, stdout, stderr) {
 }
 
 function assertNoTests(err, stdout, stderr) {
+  stderr = cleanupStderr(stderr);
   assertHeader(err, stdout, stderr);
   assert(err, 'no assertions run is considered a failure');
   assert.equal(stderr, '', 'tapsert does not write to stderr');
@@ -48,6 +56,7 @@ function assertNoTests(err, stdout, stderr) {
 }
 
 function tapsertExample(err, stdout, stderr) {
+  stderr = cleanupStderr(stderr);
   assertHeader(err, stdout, stderr);
   assert(err, 'example fails and exits with non-zero code');
   assert.equal(stderr, '', 'example does not write to stderr');
@@ -58,6 +67,7 @@ function tapsertExample(err, stdout, stderr) {
 }
 
 function assertExample(err, stdout, stderr) {
+  stderr = cleanupStderr(stderr);
   assert(err, 'failure results in non-zero exit');
   assert.equal(stdout, '', 'prints nothing to stdout');
   assert(/^AssertionError.*: really want false to be true$/m.test(stderr),
@@ -67,6 +77,7 @@ function assertExample(err, stdout, stderr) {
 }
 
 function tapExample(err, stdout, stderr) {
+  stderr = cleanupStderr(stderr);
   assertHeader(err, stdout, stderr);
   assert(err, 'tap-example fails and exits with non-zero code');
   assert.equal(stderr, '', 'tap-example does not write to stderr');
@@ -77,11 +88,13 @@ function tapExample(err, stdout, stderr) {
 }
 
 function assertHeader(err, stdout, stderr) {
+  stderr = cleanupStderr(stderr);
   assert(/^\s*TAP version 13/.test(stdout),
          'TAP version header is the first non-whitespace output');
 }
 
 function assertFail(err, stdout, stderr) {
+  stderr = cleanupStderr(stderr);
   assertHeader(err, stdout, stderr);
   assert(err, 'failing file exits with an error');
   assert.equal(stderr, '', 'assert.fail does not write to stderr');
